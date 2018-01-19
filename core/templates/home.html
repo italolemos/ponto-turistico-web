@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="painel">
+        {% for key in data %}
+            <div class="col-md-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">{{ key.name|capfirst }}</div>
+                    <div id="nome" class="panel-body">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading"></h4>
+                                <p class="list-group-item-text">
+                                    <ul>
+                                        <li><span><b>Categoria:</b></span> {{ key.category.name }}</li>
+                                        <li><span><b>Cidade:</b></span> {{ key.city.name }}</li>
+                                        <li><span><b>Endereço:</b></span> {{ key.address }}</li>
+                                    </ul>
+                                    <p>
+                                        {{ key.description }}
+                                    </p>
+                                </p>
+                            </a>
+                        </div>
+                        <button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Reprovar</button>
+                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Aprovar</button>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+    <script>
+        var data={{ data|safe }};
+        var json_string = JSON.stringify(data);
+        var json = JSON.parse(json_string);
+        var lista = $.parseJSON(json_string);
+
+        $.each($.parseJSON(json_string), function (idx, obj) {
+
+            $('#painel').append()
+        })
+
+        console.log(lista)
+
+    </script>
+{% endblock %}
