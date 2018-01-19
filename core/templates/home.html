@@ -23,25 +23,48 @@
                             </a>
                         </div>
                         <button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Reprovar</button>
-                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Aprovar</button>
+                        <button id='submit' type="submit" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Aprovar</button>
                     </div>
                 </div>
             </div>
-
         {% endfor %}
     </div>
     <script>
-        var data={{ data|safe }};
-        var json_string = JSON.stringify(data);
-        var json = JSON.parse(json_string);
-        var lista = $.parseJSON(json_string);
+        $('#submit').click(function () {
+            url = 'https://turismope.herokuapp.com/api/places/';
+            data = {
+                "latitude": "-7.835196",
+                "longitude": "-34.907151",
+                "altitude": "",
+                "category": {
+                    "id": 2
+                },
+                "city": {
+                    "id": 76
+                },
+                "approved": 1,
+                "description": "Lugar para testes",
+                "address": "Rua Porto Digital, 274, Antigo, Recife, CEP: 54100120",
+                "name": "Novo Lugar I",
+                "language": "",
+                "id": 1538
+            }
 
-        $.each($.parseJSON(json_string), function (idx, obj) {
 
-            $('#painel').append()
-        })
+            $.ajax({
+                url: url,
+                type: "PUT",
+                data: data,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function () {
+                    console.log("Pure jQuery Pure JS object");
+                }
+            });
 
-        console.log(lista)
+        });
+
+{#https://turismope.herokuapp.com/api/places/{"latitude":"-7.835196","longitude":"-34.907151","altitude":"","category":{"id":2},"city":{"id":76},"approved":1,"description":"Lugar para testes","address":"Rua Porto Digital, 274, Antigo, Recife, CEP: 54100120","name":"Novo Lugar I","language":"","id":1538}#}
 
     </script>
 {% endblock %}
